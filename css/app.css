@@ -1,0 +1,418 @@
+/* ==========================================================================
+    Apple-Inspired Aesthetic, Glassmorphism & Modern Animations
+   ========================================================================== */
+
+:root {
+  --apple-bg: #000000;
+  --apple-card-bg: rgba(255, 255, 255, 0.05);
+  --apple-card-border: rgba(255, 255, 255, 0.12);
+  --apple-glow-primary: rgba(0, 113, 227, 0.35);
+  --apple-glow-secondary: rgba(191, 90, 242, 0.25);
+  --apple-purple: #bf5af2;
+  --apple-blue: #0a84ff;
+  --apple-green: #30d158;
+  --apple-text-main: #f5f5f7;
+  --apple-text-sub: #86868b;
+  --apple-radius: 24px;
+  --apple-font: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+body {
+  background-color: var(--apple-bg);
+  color: var(--apple-text-main);
+  font-family: var(--apple-font);
+  overflow-x: hidden;
+  position: relative;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* --------------------------------------------------------------------------
+   Ambient Background Glows (Arka fon çyralary)
+   -------------------------------------------------------------------------- */
+.ambient-glow-1, .ambient-glow-2 {
+  position: fixed;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  filter: blur(140px);
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+.ambient-glow-1 {
+  top: -100px;
+  left: -100px;
+  background: radial-gradient(circle, var(--apple-glow-primary), transparent 70%);
+  animation: floatGlow 12s infinite alternate ease-in-out;
+}
+
+.ambient-glow-2 {
+  top: 40%;
+  right: -150px;
+  background: radial-gradient(circle, var(--apple-glow-secondary), transparent 70%);
+  animation: floatGlow 15s infinite alternate-reverse ease-in-out;
+}
+
+@keyframes floatGlow {
+  0% { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(60px, 80px) scale(1.15); }
+}
+
+/* --------------------------------------------------------------------------
+   Glassmorphism Navigation Bar
+   -------------------------------------------------------------------------- */
+.glass-nav {
+  background: rgba(22, 22, 23, 0.75);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--apple-card-border);
+  border-radius: 40px;
+  padding: 10px 24px;
+  margin-top: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  transition: all 0.3s ease;
+}
+
+.nav-link {
+  color: var(--apple-text-sub) !important;
+  font-weight: 500;
+  padding: 6px 16px !important;
+  border-radius: 20px;
+  transition: all 0.3s ease;
+}
+
+.nav-link:hover, .nav-link.active {
+  color: #fff !important;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* --------------------------------------------------------------------------
+   Typography & Bento Cards
+   -------------------------------------------------------------------------- */
+.hero-title {
+  font-size: clamp(2.5rem, 6vw, 4.2rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  background: linear-gradient(180deg, #ffffff 0%, #a1a1a6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.section-tag {
+  color: var(--apple-blue);
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.section-title {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 2rem;
+}
+
+/* Bento Card Style */
+.bento-card {
+  background: var(--apple-card-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--apple-card-border);
+  border-radius: var(--apple-radius);
+  transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), 
+              box-shadow 0.4s cubic-bezier(0.165, 0.84, 0.44, 1),
+              border-color 0.4s ease;
+  height: 100%;
+}
+
+.bento-card:hover {
+  transform: translateY(-8px) scale(1.01);
+  border-color: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 
+              0 0 30px rgba(10, 132, 255, 0.15);
+}
+
+/* --------------------------------------------------------------------------
+   Status Badge & Tech Pills
+   -------------------------------------------------------------------------- */
+.status-badge {
+  background: rgba(48, 209, 88, 0.1);
+  border: 1px solid rgba(48, 209, 88, 0.3);
+  color: var(--apple-green);
+  padding: 6px 16px;
+  border-radius: 30px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.pulse-dot {
+  width: 8px;
+  height: 8px;
+  background-color: var(--apple-green);
+  border-radius: 50%;
+  box-shadow: 0 0 0 rgba(48, 209, 88, 0.4);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(48, 209, 88, 0.7); }
+  70% { box-shadow: 0 0 0 10px rgba(48, 209, 88, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(48, 209, 88, 0); }
+}
+
+.tech-pill {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: var(--apple-text-main);
+  padding: 8px 14px;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+}
+
+.tech-pill:hover {
+  background: rgba(255, 255, 255, 0.15);
+  transform: translateY(-2px);
+}
+
+/* --------------------------------------------------------------------------
+   Buttons (Glow & Glass Buttons)
+   -------------------------------------------------------------------------- */
+.btn-apple-glow {
+  background: linear-gradient(135deg, #0071e3, #42a5f5);
+  color: #ffffff;
+  font-weight: 600;
+  padding: 12px 28px;
+  border-radius: 30px;
+  border: none;
+  box-shadow: 0 4px 20px rgba(0, 113, 227, 0.4);
+  transition: all 0.3s ease;
+}
+
+.btn-apple-glow:hover {
+  background: linear-gradient(135deg, #0077ed, #64b5f6);
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 113, 227, 0.6);
+}
+
+.btn-apple-glass {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #fff;
+  font-weight: 600;
+  padding: 12px 28px;
+  border-radius: 30px;
+  transition: all 0.3s ease;
+}
+
+.btn-apple-glass:hover {
+  background: rgba(255, 255, 255, 0.18);
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+/* --------------------------------------------------------------------------
+   Avatar & Music Player Widget
+   -------------------------------------------------------------------------- */
+.avatar-glow-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.avatar-img {
+  width: 220px;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+  position: relative;
+  z-index: 2;
+}
+
+.avatar-glow-wrapper::before {
+  content: '';
+  position: absolute;
+  top: -10px; left: -10px; right: -10px; bottom: -10px;
+  background: linear-gradient(45deg, #0a84ff, var(--apple-purple), #30d158);
+  border-radius: 50%;
+  filter: blur(20px);
+  opacity: 0.5;
+  z-index: 1;
+  animation: rotateGlow 8s linear infinite;
+}
+
+@keyframes rotateGlow {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.music-widget {
+  background: rgba(30, 30, 32, 0.7);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--apple-card-border);
+  border-radius: 20px;
+  padding: 16px;
+}
+
+/* Vinyl Disk Animation */
+.vinyl-disk {
+  width: 48px;
+  height: 48px;
+  background: #111;
+  border-radius: 50%;
+  border: 2px solid #333;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.5s ease;
+}
+
+.vinyl-disk.playing {
+  animation: spin 3s linear infinite;
+}
+
+.vinyl-inner {
+  width: 16px;
+  height: 16px;
+  background: var(--apple-green);
+  border-radius: 50%;
+  border: 3px solid #111;
+}
+
+@keyframes spin {
+  100% { transform: rotate(360deg); }
+}
+
+/* Sound Wave Bar Animation */
+.sound-wave {
+  display: flex;
+  gap: 3px;
+  align-items: flex-end;
+  height: 16px;
+}
+
+.sound-wave div {
+  width: 3px;
+  height: 100%;
+  background: var(--apple-green);
+  border-radius: 3px;
+  opacity: 0.3;
+}
+
+.sound-wave.playing div {
+  opacity: 1;
+  animation: wave 1s infinite ease-in-out alternate;
+}
+
+.sound-wave.playing div:nth-child(1) { animation-delay: 0.1s; }
+.sound-wave.playing div:nth-child(2) { animation-delay: 0.3s; }
+.sound-wave.playing div:nth-child(3) { animation-delay: 0.2s; }
+.sound-wave.playing div:nth-child(4) { animation-delay: 0.4s; }
+
+@keyframes wave {
+  0% { height: 20%; }
+  100% { height: 100%; }
+}
+
+.play-btn-apple {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #ffffff;
+  color: #000;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  transition: transform 0.2s ease;
+}
+
+.play-btn-apple:hover {
+  transform: scale(1.1);
+}
+
+.live-clock-badge {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: 1px;
+}
+
+/* --------------------------------------------------------------------------
+   Projects Section Images
+   -------------------------------------------------------------------------- */
+.project-img-wrapper {
+  overflow: hidden;
+  border-radius: 16px;
+  position: relative;
+}
+
+.project-img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.bento-card:hover .project-img {
+  transform: scale(1.08);
+}
+
+/* --------------------------------------------------------------------------
+   Contact Form Inputs
+   -------------------------------------------------------------------------- */
+.apple-input {
+  background: rgba(255, 255, 255, 0.05) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  color: #ffffff !important;
+  border-radius: 14px !important;
+  padding: 12px 18px !important;
+  transition: all 0.3s ease !important;
+}
+
+.apple-input:focus {
+  background: rgba(255, 255, 255, 0.08) !important;
+  border-color: var(--apple-blue) !important;
+  box-shadow: 0 0 15px rgba(10, 132, 255, 0.3) !important;
+  outline: none;
+}
+
+.apple-input::placeholder {
+  color: #6e6e73 !important;
+}
+
+/* --------------------------------------------------------------------------
+   Responsive Mobile Fixes (Telefonlar üçin sazlamalar)
+   -------------------------------------------------------------------------- */
+@media (max-width: 991px) {
+  .glass-nav {
+    border-radius: 20px;
+    margin-top: 5px;
+    padding: 12px 20px;
+  }
+  
+  .hero-title {
+    margin-top: 20px;
+  }
+  
+  .tech-pill-container {
+    padding-right: 0 !important;
+  }
+}

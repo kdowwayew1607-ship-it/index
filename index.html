@@ -1,141 +1,259 @@
-
 <!DOCTYPE html>
 <html lang="tk">
 <head>
     <meta charset="UTF-8">
-    <meta name="Barde size web site duzup bermek hyzmatlaryny hodurleyaris amatly bahadan" content="width=device-width, initial-scale=1.0">
-    <title>Bu Menin Storym</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[ SYSTEM_OVERRIDE ] // KAKAJAN</title>
 
     <!-- Bootstrap 5 CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="css/bootstrap-icons.min.css">
-    <link rel="stylesheet" href="css/style.css">
-    <!-- Google Fonts (SF Pro / Inter Aesthetic) -->
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <!-- Google Hacker Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --cyber-green: #00ff66;
+            --cyber-dim: rgba(0, 255, 102, 0.15);
+            --cyber-glow: 0 0 15px rgba(0, 255, 102, 0.6);
+            --bg-black: #050807;
+            --card-bg: rgba(10, 20, 15, 0.75);
+            --border-green: rgba(0, 255, 102, 0.3);
+        }
 
-  
+        body {
+            background-color: var(--bg-black);
+            color: #a3e6c2;
+            font-family: 'Fira Code', monospace;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Matrix Canvas Background */
+        #matrixCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            opacity: 0.25;
+            pointer-events: none;
+        }
+
+        /* Scanline Overlay Effect */
+        .scanline-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0) 50%, rgba(0, 0, 0, 0.3) 50%, rgba(0, 0, 0, 0.3));
+            background-size: 100% 4px;
+            z-index: 999;
+            pointer-events: none;
+            opacity: 0.6;
+        }
+
+        /* Hacker Glass Card */
+        .cyber-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-green);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+            border-radius: 4px;
+            backdrop-filter: blur(10px);
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .cyber-card:hover {
+            border-color: var(--cyber-green);
+            box-shadow: var(--cyber-glow);
+            transform: translateY(-3px);
+        }
+
+        .cyber-card::before {
+            content: '$root@system:~';
+            position: absolute;
+            top: -10px;
+            left: 15px;
+            background: var(--bg-black);
+            padding: 0 8px;
+            font-size: 0.75rem;
+            color: var(--cyber-green);
+            border: 1px solid var(--border-green);
+        }
+
+        /* Terminal Text Styling */
+        .neon-text {
+            color: var(--cyber-green);
+            text-shadow: var(--cyber-glow);
+            font-family: 'Share Tech Mono', monospace;
+        }
+
+        .hero-title {
+            font-size: clamp(2rem, 5vw, 3.8rem);
+            font-weight: 700;
+        }
+
+        /* Custom Cyber Buttons */
+        .btn-cyber {
+            background: transparent;
+            color: var(--cyber-green);
+            border: 1px solid var(--cyber-green);
+            font-family: 'Share Tech Mono', monospace;
+            padding: 10px 24px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .btn-cyber:hover {
+            background: var(--cyber-green);
+            color: #000;
+            box-shadow: var(--cyber-glow);
+            font-weight: bold;
+        }
+
+        /* Avatar Section */
+        .avatar-hacker {
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            border: 2px solid var(--cyber-green);
+            box-shadow: var(--cyber-glow);
+            filter: grayscale(80%) sepia(100%) hue-rotate(90deg) saturate(300%);
+        }
+
+        /* Glitch Effect Badge */
+        .glitch-badge {
+            background: var(--cyber-dim);
+            border: 1px dashed var(--cyber-green);
+            color: var(--cyber-green);
+            padding: 4px 12px;
+            font-size: 0.85rem;
+        }
+
+        /* Inputs */
+        .cyber-input {
+            background: rgba(0, 0, 0, 0.7) !important;
+            border: 1px solid var(--border-green) !important;
+            color: var(--cyber-green) !important;
+            font-family: 'Fira Code', monospace !important;
+        }
+
+        .cyber-input:focus {
+            border-color: var(--cyber-green) !important;
+            box-shadow: var(--cyber-glow) !important;
+        }
+
+        .nav-link {
+            color: #a3e6c2 !important;
+            font-family: 'Share Tech Mono', monospace;
+            text-transform: uppercase;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: var(--cyber-green) !important;
+            text-shadow: var(--cyber-glow);
+        }
+    </style>
 </head>
 <body>
 
-    <div class="ambient-glow-1"></div>
-    <div class="ambient-glow-2"></div>
+    <!-- CRT Scanline Screen Effect -->
+    <div class="scanline-overlay"></div>
 
-    <!-- Floating Navigation Bar -->
-    <div class="container fixed-top d-flex justify-content-center z-3">
-        <nav class="navbar glass-nav navbar-expand-lg">
-            <div class="container-fluid px-0">
-                <a class="navbar-brand text-white fw-bold d-flex align-items-center gap-2 me-4" href="#">
-                    <i class="bi bi-apple fs-4"></i> <span style="font-family: 'Space Grotesk';">Kakajan.</span>
-                </a>
-                <button class="navbar-toggler text-white border-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#navContent">
-                    <i class="bi bi-list fs-2 text-white"></i>
-                </button>
-                <div class="collapse navbar-collapse" id="navContent">
-                    <ul class="navbar-nav gap-2">
-                        <li class="nav-item"><a class="nav-link active" href="#hero">Özüm Barada</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#skills">Başarnyklarym</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#projects">Taslamalar</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#contact">Habarlaşmak</a></li>
-                    </ul>
-                </div>
+    <!-- Matrix Rain Canvas -->
+    <canvas id="matrixCanvas"></canvas>
+
+    <!-- Navigation Bar -->
+    <div class="container fixed-top pt-3 z-3">
+        <nav class="navbar navbar-expand-lg cyber-card px-3">
+            <a class="navbar-brand neon-text fw-bold" href="#">
+                <i class="bi bi-terminal-fill me-2"></i>[ KAKAJAN.EXE ]
+            </a>
+            <button class="navbar-toggler text-white border-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#navContent">
+                <i class="bi bi-list neon-text fs-2"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navContent">
+                <ul class="navbar-nav ms-auto gap-3">
+                    <li class="nav-item"><a class="nav-link active" href="#hero">> ./about</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#skills">> ./skills</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#projects">> ./projects</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">> ./contact</a></li>
+                </ul>
             </div>
         </nav>
     </div>
 
     <!-- Hero Section -->
-    <section id="hero" class="pt-5 mt-5 min-vh-100 d-flex align-items-center position-relative">
+    <section id="hero" class="min-vh-100 d-flex align-items-center pt-5">
         <div class="container pt-5">
             <div class="row align-items-center g-5">
-                <div class="col-lg-7 text-center text-lg-start">
+                <div class="col-lg-7">
                     
-                    <div class="mb-4 d-inline-block">
-                        <div class="status-badge">
-                            <span class="pulse-dot"></span> Täze taslamalar üçin açyk
-                        </div>
+                    <div class="mb-3">
+                        <span class="glitch-badge">
+                            <i class="bi bi-broadcast me-1"></i> STATUS: SYSTEM_ONLINE
+                        </span>
                     </div>
 
-                    <h1 class="hero-title mb-3">Kämil Dizaýn. <br><span class="text-white">Ýokary Hilli Kod.</span></h1>
+                    <h1 class="hero-title neon-text mb-3">
+                        &lt;DEV_OVERRIDE&gt;<br>
+                        CODE &amp; DESIGN
+                    </h1>
                     
-                    <p class="fs-5 text-secondary mb-4 leading-relaxed" style="max-width: 580px;">
-                        Salam, men <strong class="text-white">Bäşim Dowwaýew</strong>. Sanly dünýäde islege görä web/site düzüp bermek hyzmatyny hödürleýärin. We ýene-de Word, Excel, Power Point işlemek hyzmaty bar.
+                    <p class="fs-5 mb-4 text-light-50">
+                        Salam, men <strong class="neon-text">Bäşim Dowwaýew</strong>. Sanly dünýäde web/site amala aşyrmak we ulgamlary optimize etmek boýunça hünärmen. MS Office (Word, Excel, PowerPoint) boýunça amaly çözgütler.
                     </p>
 
-                    <div class="d-flex flex-wrap justify-content-center justify-content-lg-start gap-3 mb-5">
-                        <a href="#contact" class="btn btn-apple-glow">
-                            <i class="bi bi-chat-fill me-2"></i> Habarlaşyň
+                    <div class="d-flex flex-wrap gap-3 mb-4">
+                        <a href="#contact" class="btn btn-cyber">
+                            <i class="bi bi-terminal me-2"></i> [ HABARLAŞYŇ ]
                         </a>
-                        <a href="#projects" class="btn btn-apple-glass">
-                            Taslamalara Seret <i class="bi bi-arrow-down-short ms-1"></i>
+                        <a href="#projects" class="btn btn-cyber">
+                            [ TASLAMALAR ]
                         </a>
                     </div>
 
                     <!-- Tech Stack Pills -->
-                    <div class="d-flex flex-wrap justify-content-center  justify-content-lg-start gap-2 pt-2" style="padding-right: 200px;">
-                        <span class="tech-pill"><i class="bi bi-terminal text-danger me-1"></i> Laravel 11</span>
-                        <span class="tech-pill"><i class="bi bi-bootstrap-fill text-primary me-1"></i> Bootstrap 5</span>
-                        <span class="tech-pill"><i class="bi bi-filetype-html text-warning me-1"></i> HTML & CSS</span>
-                        <span class="tech-pill"><i class="bi bi-code-slash text-secondary me-1"></i> C++</span>
-                        <span class="tech-pill"><i class="bi bi-filetype-js text-warning me-1"></i> JavaScript</span>
-                        <span class="tech-pill"><i class="bi bi-filetype-docx text-info me-1"></i> Word</span>
-                        <span class="tech-pill"><i class="bi bi-filetype-xlsx text-success me-1"></i> Excel</span>
-                        <span class="tech-pill"><i class="bi bi-filetype-pptx text-danger me-1"></i> Power Point</span>
+                    <div class="d-flex flex-wrap gap-2 pt-2">
+                        <span class="glitch-badge">Laravel_11</span>
+                        <span class="glitch-badge">Bootstrap_5</span>
+                        <span class="glitch-badge">HTML_CSS</span>
+                        <span class="glitch-badge">C++</span>
+                        <span class="glitch-badge">JavaScript</span>
+                        <span class="glitch-badge">MS_Office</span>
                     </div>
 
                 </div>
 
-                <!-- Right Column: Avatar & Dynamic Widgets -->
-                <div class="col-lg-5">
-                    <div class="text-center position-relative">
+                <!-- Right Side: Terminal Player & Profile -->
+                <div class="col-lg-5 text-center">
+                    <div class="cyber-card p-4">
                         
-                        <!-- Premium Profile Image -->
-                        <div class="avatar-glow-wrapper mb-4">
-                            <!-- SURAT ÝERI: Meselem öz fotosuratyňyz -->
-                            <img src="foto/IMG_20260224_125419.jpg" alt="Sedar Profile" class="avatar-img">
-                        </div>
+                        <img src="foto/IMG_20260224_125419.jpg" alt="Profile" class="avatar-hacker rounded-circle mb-3">
 
-                        <!-- Music Widget (Aýdym diňlenilýän ýer) -->
-                        <div class="music-widget text-start mt-4 shadow-lg">
-                            <div class="d-flex align-items-center justify-content-between mb-3">
-                                <div class="d-flex align-items-center gap-2">
-                                    <i class="bi bi-spotify text-success fs-5"></i>
-                                    <span class="text-secondary small fw-bold text-uppercase">Häzir Diňlenilýär</span>
-                                </div>
-                                <div class="sound-wave" id="soundWave">
-                                    <div></div><div></div><div></div><div></div>
-                                </div>
+                        <!-- Audio Cyber Widget -->
+                        <div class="border border-success p-3 text-start bg-black">
+                            <div class="d-flex align-items-center justify-content-between mb-2">
+                                <span class="neon-text small"><i class="bi bi-disc me-1"></i> AUDIO_STREAM</span>
+                                <span class="badge bg-success text-black" id="statusAudio">STOPPED</span>
                             </div>
                             
-                            <div class="d-flex align-items-center gap-3">
-                                <!-- Vinyl Record -->
-                                <div class="vinyl-disk" id="vinylDisk">
-                                    <div class="vinyl-inner"></div>
-                                </div>
-                                
-                                <div class="flex-grow-1 overflow-hidden">
-                                    <h6 class="fw-bold mb-1 text-truncate" id="songTitle">Kavkaz 2026 - Mix echo</h6>
-                                    <p class="text-secondary small mb-0 text-truncate" id="songArtist">Agaliev_official</p>
-                                </div>
+                            <p class="small text-truncate mb-2" id="songTitle">Kavkaz 2026 - Mix echo</p>
 
-                                <button class="play-btn-apple" id="playBtn" onclick="toggleAudio()">
-                                    <i class="bi bi-play-fill" id="playIcon"></i>
-                                </button>
-                            </div>
+                            <button class="btn btn-cyber btn-sm w-100" id="playBtn" onclick="toggleAudio()">
+                                <i class="bi bi-play-fill me-1"></i> [ EXECUTE_AUDIO ]
+                            </button>
 
-                            <!-- Audio Tag (Ses faýly) -->
                             <audio id="bgAudio" loop src="foto/Kavkaz 2026 - Mix echo  (1).mp3"></audio>
                         </div>
 
-                        <!-- Live Time & Location Widget -->
-                        <div class="d-flex gap-3 mt-3">
-                            <div class="bento-card p-3 flex-fill text-center">
-                                <span class="text-secondary small d-block mb-1"><i class="bi bi-clock me-1"></i> Aşgabat Wagty</span>
-                                <div class="live-clock-badge" id="liveClock">12:00</div>
-                            </div>
-                            <div class="bento-card px-3 py-4 flex-fill text-center d-flex flex-column  justify-content-center">
-                                <span class="text-secondary small mb-1"><i class="bi bi-geo-alt text-danger me-"></i> Ýerleşýän Ýerim</span>
-                                <span class="fw-bold text-white h4 ">Aşgabat, TM</span>
-                            </div>
+                        <!-- Clock Widget -->
+                        <div class="mt-3 d-flex justify-content-between text-start small">
+                            <div>LOCATION: <span class="neon-text">ASHGABAT_TM</span></div>
+                            <div>TIME: <span class="neon-text" id="liveClock">00:00:00</span></div>
                         </div>
 
                     </div>
@@ -144,128 +262,59 @@
         </div>
     </section>
 
-    <!-- Skills Bento Grid -->
+    <!-- Skills Section -->
     <section id="skills" class="py-5">
-        <div class="container py-5">
-            <div class="text-center">
-                <span class="section-tag">Gözýetim & Tehnologiýa</span>
-                <h2 class="section-title">Aňrybaş Başarnyklarym</h2>
-            </div>
+        <div class="container">
+            <h2 class="neon-text mb-4">&gt; EXECUTE_SKILLS.SH</h2>
 
             <div class="row g-4">
                 <div class="col-md-4">
-                    <div class="bento-card">
-                        <div class="d-flex justify-content-between align-items-start mb-4">
-                            <div class="p-3 rounded-4 bg-primary bg-opacity-10 text-primary fs-3">
-                                <i class="bi bi-window-sidebar"></i>
-                            </div>
-                            <span class="badge bg-white bg-opacity-10 text-white rounded-pill px-3 py-2 small">Frontend</span>
-                        </div>
-                        <h4 class="fw-bold mb-2">Modern Web Dev</h4>
-                        <p class="text-secondary fs-6 mb-0">Çalt, durnukly, söwda hem-de şahsy maksatlara niýetlenen responsive web sahypalary döretmek.</p>
+                    <div class="cyber-card p-4">
+                        <h4 class="neon-text mb-3"># Web_Dev</h4>
+                        <p class="small mb-0">Frontend we backend platformalary taýýarlamak. Tiz, ygtybarly we durnukly kodlaşdyrma.</p>
                     </div>
                 </div>
-
                 <div class="col-md-4">
-                    <div class="bento-card">
-                        <div class="d-flex justify-content-between align-items-start mb-4">
-                            <div class="p-3 rounded-4 bg-purple bg-opacity-10 text-warning fs-3" style="background: rgba(191,90,242,0.1) !important; color: var(--apple-purple) !important;">
-                                <i class="bi bi-palette"></i>
-                            </div>
-                            <span class="badge bg-white bg-opacity-10 text-white rounded-pill px-3 py-2 small">UI/UX Aesthetics</span>
-                        </div>
-                        <h4 class="fw-bold mb-2">Apple Style Dizaýn</h4>
-                        <p class="text-secondary fs-6 mb-0">Glassmorphism, minimalist tipografika we gözüňi ýadatmaýan garaňky tema ölçegleri.</p>
+                    <div class="cyber-card p-4">
+                        <h4 class="neon-text mb-3"># UI_Cyber_Design</h4>
+                        <p class="small mb-0">Minimalist, garaňky temaly interfeýsler we döwrebap sanly çözgütler.</p>
                     </div>
                 </div>
-
                 <div class="col-md-4">
-                    <div class="bento-card">
-                        <div class="d-flex justify-content-between align-items-start mb-4">
-                            <div class="p-3 rounded-4 bg-success bg-opacity-10 text-success fs-3">
-                                <i class="bi bi-lightning-charge"></i>
-                            </div>
-                            <span class="badge bg-white bg-opacity-10 text-white rounded-pill px-3 py-2 small">Optimizasiýa</span>
-                        </div>
-                        <h4 class="fw-bold mb-2">Ýokary Tizlik & SEO</h4>
-                        <p class="text-secondary fs-6 mb-0">Gözleg ulgamlary üçin optimizirlenen hem-de telefonlarda göz açyp-ýumasyça açylýan kod gurluşy.</p>
+                    <div class="cyber-card p-4">
+                        <h4 class="neon-text mb-3"># Optimization</h4>
+                        <p class="small mb-0">Gözleg ulgamlary üçin optimizirlenen tiz işleýän Web-Ulgamlar.</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Projects Section (Surat Ýerleri Bilen) -->
+    <!-- Projects Section -->
     <section id="projects" class="py-5">
-        <div class="container py-5">
-            <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-end mb-5">
-                <div>
-                    <span class="section-tag">Portfoliom</span>
-                    <h2 class="section-title mb-0">Saýlanan Taslamalar</h2>
-                </div>
-                <p class="text-secondary mt-3 mt-md-0" style="max-width: 400px;">
-                    Aşakdaky taslamalarda ulanylan ähli suratlary öz işleriňiz bilen aňsatlyk bilen çalşyp bilersiňiz.
-                </p>
-            </div>
+        <div class="container">
+            <h2 class="neon-text mb-4">&gt; LOAD_PROJECTS.LOG</h2>
 
             <div class="row g-4">
-                <!-- Project 1 -->
-                <div class="col-lg-4 col-md-6">
-                    <div class="bento-card p-3">
-                        <div class="project-img-wrapper">
-                            <!-- SURAT ÝERI 1 -->
-                            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80" alt="Fintech Web" class="project-img">
-                        </div>
-                        <div class="p-3">
-                            <div class="d-flex gap-2 mb-2">
-                                <span class="badge bg-primary bg-opacity-20 text-primary border border-primary border-opacity-25 rounded-pill px-3">E-Commerce</span>
-                            </div>
-                            <h4 class="fw-bold mb-2">Luxury Watch Store</h4>
-                            <p class="text-secondary small mb-4">Gimmat bahaly sagatlar üçin ýazylan minimalist onlaýn dükan platformasy.</p>
-                            <a href="#" class="text-decoration-none text-white fw-semibold d-inline-flex align-items-center gap-2">
-                                Taslama Seret <i class="bi bi-arrow-up-right text-primary"></i>
-                            </a>
-                        </div>
+                <div class="col-md-4">
+                    <div class="cyber-card p-3">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80" class="img-fluid border border-success mb-3" alt="Project">
+                        <h5 class="neon-text">LUXURY_WATCH_STORE</h5>
+                        <p class="small">E-Commerce platformasy.</p>
                     </div>
                 </div>
-
-                <!-- Project 2 -->
-                <div class="col-lg-4 col-md-6">
-                    <div class="bento-card p-3">
-                        <div class="project-img-wrapper">
-                            <!-- SURAT ÝERI 2 -->
-                            <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&w=800&q=80" alt="Mobile App" class="project-img">
-                        </div>
-                        <div class="p-3">
-                            <div class="d-flex gap-2 mb-2">
-                                <span class="badge bg-purple bg-opacity-20 text-warning border border-warning border-opacity-25 rounded-pill px-3" style="color:var(--apple-purple)!important;">Mobile Design</span>
-                            </div>
-                            <h4 class="fw-bold mb-2">Smart Home iOS App</h4>
-                            <p class="text-secondary small mb-4">Akyly öý ulgamlaryny dolandyrmak üçin taýýarlanan döwrebap mobil interfeýs.</p>
-                            <a href="#" class="text-decoration-none text-white fw-semibold d-inline-flex align-items-center gap-2">
-                                Taslama Seret <i class="bi bi-arrow-up-right text-primary"></i>
-                            </a>
-                        </div>
+                <div class="col-md-4">
+                    <div class="cyber-card p-3">
+                        <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&w=800&q=80" class="img-fluid border border-success mb-3" alt="Project">
+                        <h5 class="neon-text">SMART_HOME_IOS</h5>
+                        <p class="small">Mobil interfeýs dizaýny.</p>
                     </div>
                 </div>
-
-                <!-- Project 3 -->
-                <div class="col-lg-4 col-md-6">
-                    <div class="bento-card p-3">
-                        <div class="project-img-wrapper">
-                            <!-- SURAT ÝERI 3 -->
-                            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80" alt="Dashboard" class="project-img">
-                        </div>
-                        <div class="p-3">
-                            <div class="d-flex gap-2 mb-2">
-                                <span class="badge bg-success bg-opacity-20 text-success border border-success border-opacity-25 rounded-pill px-3">Analytics</span>
-                            </div>
-                            <h4 class="fw-bold mb-2">SaaS Business Analytics</h4>
-                            <p class="text-secondary small mb-4">Maliýe we ösüş görkezijilerini real-time derňeýän garaňky temaly dashboard.</p>
-                            <a href="#" class="text-decoration-none text-white fw-semibold d-inline-flex align-items-center gap-2">
-                                Taslama Seret <i class="bi bi-arrow-up-right text-primary"></i>
-                            </a>
-                        </div>
+                <div class="col-md-4">
+                    <div class="cyber-card p-3">
+                        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80" class="img-fluid border border-success mb-3" alt="Project">
+                        <h5 class="neon-text">ANALYTICS_DASHBOARD</h5>
+                        <p class="small">Maliýe gözegçilik ulgamy.</p>
                     </div>
                 </div>
             </div>
@@ -274,40 +323,30 @@
 
     <!-- Contact Form Section -->
     <section id="contact" class="py-5">
-        <div class="container py-5">
+        <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-8">
-                    <div class="bento-card p-4 p-md-5">
-                        <div class="text-center mb-5">
-                            <span class="section-tag">Habarlaşmak</span>
-                            <h2 class="fw-bold fs-1 mb-2">Täze Pikirleri Maslahatlaşalyň</h2>
-                            <p class="text-secondary">Aşakdaky formany dolduryň, tizlik bilen yza habar bererin.</p>
-                        </div>
+                    <div class="cyber-card p-4">
+                        <h3 class="neon-text mb-4">&gt; SEND_ENCRYPTED_MESSAGE</h3>
 
                         <form id="contactForm">
-                            <div class="row g-3">
-                                <div class="col-md-6">
-                                    <label class="form-label text-secondary small fw-bold">Adyňyz</label>
-                                    <input type="text" class="form-control apple-input" placeholder="Meselem: Serdar" required>
-                                </div>
-                                <div class="col-md-6">
-                                    <label class="form-label text-secondary small fw-bold">Email Salgyňyz</label>
-                                    <input type="email" class="form-control apple-input" placeholder="at@domain.com" required>
-                                </div>
-                                <div class="col-12">
-                                    <label class="form-label text-secondary small fw-bold">Hatyňyz</label>
-                                    <textarea class="form-control apple-input" rows="4" placeholder="Taslamaňyz barada gysgaça maglumat..." required></textarea>
-                                </div>
-                                <div class="col-12 text-center mt-4">
-                                    <button type="submit" class="btn btn-apple-glow w-100 py-3 fs-6">
-                                        <i class="bi bi-send-fill me-2"></i> Haty Ugratmak
-                                    </button>
-                                </div>
+                            <div class="mb-3">
+                                <label class="small mb-1">NAME_ID</label>
+                                <input type="text" class="form-control cyber-input" required placeholder="User">
                             </div>
+                            <div class="mb-3">
+                                <label class="small mb-1">EMAIL_ADDRESS</label>
+                                <input type="email" class="form-control cyber-input" required placeholder="user@domain.com">
+                            </div>
+                            <div class="mb-3">
+                                <label class="small mb-1">PAYLOAD_MESSAGE</label>
+                                <textarea class="form-control cyber-input" rows="4" required placeholder="Message..."></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-cyber w-100">[ TRANSMIT_DATA ]</button>
                         </form>
 
-                        <div id="contactToast" class="mt-4 p-3 rounded-4 text-center d-none" style="background: rgba(48, 209, 88, 0.15); border: 1px solid var(--apple-green); color: #fff;">
-                            <i class="bi bi-check-circle-fill text-success me-2"></i> Hatyňyz üstünlikli ugradyldy! Sag boluň.
+                        <div id="contactToast" class="mt-3 text-center neon-text d-none">
+                            [ SUCCESS ]: Message transmitted successfully.
                         </div>
                     </div>
                 </div>
@@ -315,67 +354,82 @@
         </div>
     </section>
 
-    <!-- Premium Footer -->
-    <footer class="py-4 border-top border-secondary border-opacity-10 text-center text-secondary small">
-        <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
-            <div>
-                &copy; 2026 <strong class="text-white">Kakajan</strong>. Bütün haklary goralan.
-            </div>
-            <div class="d-flex gap-4 fs-5">
-                <a href="#" class="text-secondary text-white-hover"><i class="bi bi-github"></i></a>
-                <a href="#" class="text-secondary text-white-hover"><i class="bi bi-instagram"></i></a>
-                <a href="#" class="text-secondary text-white-hover"><i class="bi bi-telegram"></i></a>
-                <a href="#" class="text-secondary text-white-hover"><i class="bi bi-linkedin"></i></a>
-            </div>
+    <!-- Footer -->
+    <footer class="py-4 border-top border-success text-center small">
+        <div class="container">
+            <span class="neon-text">&copy; 2026 KAKAJAN.EXE // ALL_RIGHTS_RESERVED</span>
         </div>
     </footer>
 
-    <!-- Bootstrap 5 JS -->
+    <!-- JS Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
-    <!-- JavaScript Custom Logic -->
     <script>
-        // 1. Interactive Audio Player (Aýdym diňlenilýän widget)
+        // Matrix Rain Animation Canvas
+        const canvas = document.getElementById('matrixCanvas');
+        const ctx = canvas.getContext('2d');
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()*&^%";
+        const fontSize = 16;
+        const columns = canvas.width / fontSize;
+        const rainDrops = Array.from({ length: columns }).fill(1);
+
+        function drawMatrix() {
+            ctx.fillStyle = 'rgba(5, 8, 7, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            ctx.fillStyle = '#00ff66';
+            ctx.font = fontSize + 'px monospace';
+
+            for (let i = 0; i < rainDrops.length; i++) {
+                const text = alphabet.charAt(Math.floor(Math.random() * alphabet.length));
+                ctx.fillText(text, i * fontSize, rainDrops[i] * fontSize);
+
+                if (rainDrops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    rainDrops[i] = 0;
+                }
+                rainDrops[i]++;
+            }
+        }
+        setInterval(drawMatrix, 30);
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+
+        // Audio Player Controls
         const audio = document.getElementById('bgAudio');
-        const playBtn = document.getElementById('playBtn');
-        const playIcon = document.getElementById('playIcon');
-        const vinylDisk = document.getElementById('vinylDisk');
-        const soundWave = document.getElementById('soundWave');
+        const statusAudio = document.getElementById('statusAudio');
 
         function toggleAudio() {
             if (audio.paused) {
                 audio.play();
-                playIcon.classList.replace('bi-play-fill', 'bi-pause-fill');
-                vinylDisk.classList.add('playing');
-                soundWave.classList.add('playing');
+                statusAudio.textContent = 'RUNNING';
             } else {
                 audio.pause();
-                playIcon.classList.replace('bi-pause-fill', 'bi-play-fill');
-                vinylDisk.classList.remove('playing');
-                soundWave.classList.remove('playing');
+                statusAudio.textContent = 'STOPPED';
             }
         }
 
-        // 2. Real-time Live Clock (Aşgabat Sagady)
+        // Real-time Clock
         function updateClock() {
             const now = new Date();
-            const hours = String(now.getHours()).padStart(2, '0');
-            const minutes = String(now.getMinutes()).padStart(2, '0');
-            document.getElementById('liveClock').textContent = `${hours}:${minutes}`;
+            document.getElementById('liveClock').textContent = now.toTimeString().split(' ')[0];
         }
         setInterval(updateClock, 1000);
         updateClock();
 
-        // 3. Contact Form Submission Toast Effect
+        // Contact Form
         document.getElementById('contactForm').addEventListener('submit', function(e) {
             e.preventDefault();
             const toast = document.getElementById('contactToast');
             toast.classList.remove('d-none');
             this.reset();
-
-            setTimeout(() => {
-                toast.classList.add('d-none');
-            }, 4000);
+            setTimeout(() => toast.classList.add('d-none'), 4000);
         });
     </script>
 </body>
